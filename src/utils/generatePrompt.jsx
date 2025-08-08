@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import "../index.css";
 
 function generatePrompt() {
@@ -11,9 +12,12 @@ function generatePrompt() {
 
   function handleGeneratePrompt() {
     if (!idea || !role) {
-      alert("Please fill in all required fields.");
+      toast.error("Please fill in all required fields.");
       return;
+    } else {
+      toast.success("Successfully toasted!");
     }
+
     setIsLoading(true);
     setPrompt("");
     setCopied(false);

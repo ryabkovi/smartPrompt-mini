@@ -22,3 +22,7 @@ Built clean and responsive UI with Tailwind v4.5:
 - Header with title and subtitle
 - Input + select fields + CTA button
 - Responsive preview box
+
+## Features
+
+✔ Copy prompt to clipboard
