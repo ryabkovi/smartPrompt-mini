@@ -1,21 +1,39 @@
 import React, { useState } from "react";
+import "../index.css";
 
 function generatePrompt() {
   const [idea, setIdea] = useState("");
   const [role, setRole] = useState("");
   const [topic, setTopic] = useState("");
   const [prompt, setPrompt] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   function handleGeneratePrompt() {
     if (!idea || !role) {
       alert("Please fill in all required fields.");
       return;
     }
+    setIsLoading(true);
+    setPrompt("");
+    setCopied(false);
 
-    const generatedPrompt = `As a ${role}, I want to create a prompt for the topic "${
-      topic || "general"
-    }" based on the idea: "${idea}".`;
-    setPrompt(generatedPrompt);
+    setTimeout(() => {
+      const generatedPrompt = `As a ${role}, I want to create a prompt for the topic "${
+        topic || "general"
+      }" based on the idea: "${idea}".`;
+      setPrompt(generatedPrompt);
+      setIsLoading(false);
+    }, 1200);
+  }
+
+  function handleCopy() {
+    if (prompt) {
+      navigator.clipboard.writeText(prompt).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      });
+    }
   }
 
   return (
@@ -53,10 +71,11 @@ function generatePrompt() {
       </select>
 
       <button
-        className="w-full bg-blue-600 text-white p-3 rounded-xl font-medium hover:bg-blue-700 transition"
+        type="button"
+        className="w-full bg-blue-600 text-white p-3 rounded-xl font-medium hover:bg-blue-700 transition "
         onClick={handleGeneratePrompt}
       >
-        Generate Prompt
+        {isLoading ? "Generating..." : "Generate Prompt"}
       </button>
 
       {prompt && (
@@ -64,7 +83,18 @@ function generatePrompt() {
           <h2 className="text-lg font-semibold text-gray-800 mb-2">
             Prompt Preview
           </h2>
-          <p className="text-gray-700">{prompt}</p>
+          <p className="text-gray-700 mb-3">{prompt}</p>
+          <button
+            type="button"
+            className={`px-4 py-2 rounded-lg font-medium transition border ${
+              copied
+                ? "bg-green-500 text-white border-green-500"
+                : "bg-gray-100 text-gray-800 border-gray-300 hover:bg-blue-600 hover:text-white hover:border-blue-600"
+            }`}
+            onClick={handleCopy}
+          >
+            {copied ? "Copied!" : "Copy to Clipboard"}
+          </button>
         </div>
       )}
     </main>
