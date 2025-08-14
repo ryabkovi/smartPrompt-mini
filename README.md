@@ -19,6 +19,7 @@ npm run dev
 ## 🎨 UI Design
 
 Built clean and responsive UI with Tailwind v4.5:
+
 - Header with title and subtitle
 - Input + select fields + CTA button
 - Responsive preview box
@@ -26,3 +27,7 @@ Built clean and responsive UI with Tailwind v4.5:
 ## Features
 
 ✔ Copy prompt to clipboard
+
+### 🔧 Dependencies Added:
+
+- `react-hot-toast`

@@ -41,10 +41,11 @@ function generatePrompt() {
   }
 
   return (
-    <main className="max-w-xl mx-auto space-y-5">
+    <main className="max-w-xl mx-auto space-y-5 p-4 md:grid-cols-2">
       <input
+        aria-label="Enter your idea"
         type="text"
-        placeholder="Enter your idea..."
+        placeholder="Enter your idea"
         className="w-full p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={idea}
         onChange={(e) => setIdea(e.target.value)}
@@ -52,6 +53,7 @@ function generatePrompt() {
       />
 
       <select
+        aria-label="Select a role"
         className="w-full p-3 border rounded-xl bg-white"
         value={role}
         onChange={(e) => setRole(e.target.value)}
@@ -64,9 +66,11 @@ function generatePrompt() {
       </select>
 
       <select
+        aria-label="Select a topic"
         className="w-full p-3 border rounded-xl bg-white"
         value={topic}
         onChange={(e) => setTopic(e.target.value)}
+        required
       >
         <option value="">Select a topic</option>
         <option>Startup Idea</option>
@@ -75,6 +79,7 @@ function generatePrompt() {
       </select>
 
       <button
+        aria-describedby="Generating-button"
         type="button"
         className="w-full bg-blue-600 text-white p-3 rounded-xl font-medium hover:bg-blue-700 transition "
         onClick={handleGeneratePrompt}
@@ -87,7 +92,7 @@ function generatePrompt() {
           <h2 className="text-lg font-semibold text-gray-800 mb-2">
             Prompt Preview
           </h2>
-          <p className="text-gray-700 mb-3">{prompt}</p>
+          <p className="text-gray-700 mb-5">{prompt}</p>
           <button
             type="button"
             className={`px-4 py-2 rounded-lg font-medium transition border ${
